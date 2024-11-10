@@ -1,0 +1,28 @@
+{% load static %}
+{% block body %}
+<footer class="footer pt-1 text-light">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h3>Entre em contato</h3>
+                <address>
+                    +55 43 99619-5504
+                    <br/>
+                    <a href="mailto:{{ contato_email }}">{{ contato_email }}</a>
+                </address>
+            </div>
+        </div>
+    </div>
+
+    <div class="pb-1">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    Site criado por Gustavo <a href="https://www.linkedin.com/in/gustavo-junior-dos-santos/" target="_blank">Gustavo
+                    Junior Dos Santos</a> {% now 'Y' %}
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+{% endblock body %}
