@@ -1,0 +1,12 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Desafios Atribuídos{% endblock %}
+
+{% block content %}
+    <h2>Desafios Atribuídos</h2>
+    <ul>
+        {% for participacao in participacoes %}
+            <li>{{ participacao.desafio.nome }} - Pontuação: {{ participacao.pontuacao }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

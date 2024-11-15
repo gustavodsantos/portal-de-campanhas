@@ -1,0 +1,30 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Cadastrar Corretor{% endblock %}
+
+{% block content %}
+    <h2>Cadastrar Corretor</h2>
+    
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="row py-3">
+            <div class="col-sm-10 input-group-lg">
+                {{ form.user }}
+            </div>
+        </div>
+
+        <div class="row py-3">
+            <div class="col-sm-10 input-group-lg">
+                {{ form.cpf }}
+            </div>
+        </div>
+        
+        <div class="row py-3">
+            <div class="col-sm-2">
+                <button class="btn btn-lg btn-outline-primary btn-block" type="submit">Cadastrar</button>
+            </div>
+        </div>
+    </form>
+
+{% endblock %}
