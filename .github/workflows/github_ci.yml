@@ -41,4 +41,4 @@ jobs:
         run: cp config/env-sample .env
 
       - name: Run testes do Django com cobertura
-        run: poetry run pytest mysite --cov=mysite --cov-fail-under=20
+        run: poetry run pytest mysite --cov=mysite --cov-fail-under=60

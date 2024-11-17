@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
 
 from .models import Corretor, Desafio, User
 
@@ -18,34 +19,45 @@ class DesafioForm(forms.ModelForm):
 class CorretorForm(forms.ModelForm):
     """Formulário para criar ou editar corretores"""
 
-    # Incluindo o campo do nome e email diretamente do modelo User
     nome = forms.CharField(max_length=64)
-    email = forms.EmailField()
 
     class Meta:
         model = Corretor
-        fields = ['nome', 'email', 'cpf']
+        fields = ['nome', 'cpf']
 
     def save(self, commit=True):
-        # Cria ou atualiza o usuário relacionado ao corretor
         corretor = super().save(commit=False)
-        user_data = {'first_name': self.cleaned_data['nome'], 'email': self.cleaned_data['email']}
-
-        if not corretor.user_id:  # Se ainda não houver um user associado
-            user = User.objects.create(**user_data)
-            corretor.user = user
-        else:  # Atualiza o usuário existente
-            for attr, value in user_data.items():
-                setattr(corretor.user, attr, value)
-            if commit:
-                corretor.user.save()
-
+        user = corretor.user
+        user.first_name = self.cleaned_data['nome']
         if commit:
+            user.save()
             corretor.save()
-
         return corretor
 
 
 class AtribuirDesafioForm(forms.Form):
     cpf = forms.CharField(max_length=11)
     desafio = forms.ModelChoiceField(queryset=Desafio.objects.all())
+
+
+class RegistroUsuarioForm(UserCreationForm):
+    """Formulário para cadastro de usuários"""
+
+    nome = forms.CharField(max_length=64, label="Nome")
+    cpf = forms.CharField(max_length=11, required=False, label="CPF (opcional, se deseja ser corretor)")
+
+    class Meta:
+        model = User
+        fields = ['email', 'password1', 'password2', 'nome', 'cpf']
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        nome = self.cleaned_data['nome']
+        cpf = self.cleaned_data.get('cpf')
+
+        user.first_name = nome
+        if commit:
+            user.save()
+            if cpf:  # Se o CPF foi preenchido, cria o perfil de corretor
+                Corretor.objects.create(user=user, cpf=cpf)
+        return user

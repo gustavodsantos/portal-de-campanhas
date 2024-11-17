@@ -34,6 +34,7 @@ html, body {
 .content {
     flex: 1;
     padding: 20px;
+    color: #1b1b1b;
 }
 
 /* Footer fixo na parte inferior */

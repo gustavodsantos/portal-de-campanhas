@@ -2,13 +2,13 @@
 
 {% block title %}Listar Desafios{% endblock %}
 
-{% block content %}
+{% block body %}
     <h1 class="font-weight-bold">Desafios Disponíveis</h1>
     <div>    
 
         <ul>
             {% for desafio in desafios %}
-                <li><a class="link" href="{% url 'core:detalhes_desafio' desafio.id %}">{{ desafio.nome }}</a></li>
+                <li><a class="link" href="{% url 'base:detalhes_desafio' desafio.id %}">{{ desafio.nome }}</a></li>
             {% endfor %}
         </ul>
     
