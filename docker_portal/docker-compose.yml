@@ -1,23 +1,22 @@
-version: "4.35.0"
 services:
   nginx:
     container_name: nginx-portal
     image: nginx:1.27.0
     volumes:
-      - ./staticfiles:/usr/share/nginx/html
+      - ./staticfiles/static:/usr/share/nginx/html/static/:rw
+      - ./mediafiles:/usr/share/nginx/html/mediafiles/:rw
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
     ports:
-      - 80:80
+      - "80:80"
 
   database:
-    container_name: portal
+    container_name: postgres-portal
     image: postgres:16.3
     volumes:
       - ./.pgdata:/var/lib/postgresql/data
     environment:
-      - LC_ALL=C.UTF-8
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_DB=postgres
     ports:
-      - 5432:5432
+      - "5432:5432"

@@ -27,4 +27,5 @@ urlpatterns = [
 ]
 
 if settings.DEBUG:
+    # Apenas para desenvolvimento local: serve arquivos de mídia pelo Django
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
