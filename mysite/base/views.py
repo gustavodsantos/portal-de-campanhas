@@ -41,7 +41,8 @@ def detalhes_desafio(request, id):
     desafio = get_object_or_404(Desafio, id=id)
     participacao = (
         ParticipacaoDesafio.objects.filter(corretor__user=request.user, desafio=desafio).first()
-        if hasattr(request.user, 'corretor') else None
+        if hasattr(request.user, 'corretor')
+        else None
     )
     return render(request, 'base/detalhes_desafio.html', {'desafio': desafio, 'participacao': participacao})
 
@@ -60,11 +61,12 @@ def aceitar_desafio(request, id):
     participacao.save()
 
     messages.success(request, 'Desafio aceito com sucesso!')
-    return redirect('base:listar_desafios')
+    return redirect('base:visualizar_desafios_atribuidos')
 
 
 @login_required
 def visualizar_desafios_atribuidos(request):
-    participacoes = ParticipacaoDesafio.objects.filter(corretor__user=request.user) \
-        if hasattr(request.user, 'corretor') else []
+    participacoes = (
+        ParticipacaoDesafio.objects.filter(corretor__user=request.user) if hasattr(request.user, 'corretor') else []
+    )
     return render(request, 'base/visualizar_desafios_atribuidos.html', {'participacoes': participacoes})

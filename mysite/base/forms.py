@@ -43,8 +43,8 @@ class AtribuirDesafioForm(forms.Form):
 class RegistroUsuarioForm(UserCreationForm):
     """Formulário para cadastro de usuários"""
 
-    nome = forms.CharField(max_length=64, label="Nome")
-    cpf = forms.CharField(max_length=11, required=False, label="CPF (opcional, se deseja ser corretor)")
+    nome = forms.CharField(max_length=64, label='Nome')
+    cpf = forms.CharField(max_length=11, required=False, label='CPF (opcional, se deseja ser corretor)')
 
     class Meta:
         model = User

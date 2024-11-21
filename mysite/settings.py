@@ -126,12 +126,76 @@ USE_TZ = True
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'docker_portal/staticfiles/static'
+# Nome do bucket S3
+AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME', default='').strip()
 
-STATICFILES_DIRS = [
-    BASE_DIR / 'mysite/base/static',
-]
+
+def configure_storage(has_s3_bucket: bool):
+    """
+    Configura o armazenamento de arquivos estáticos e de mídia,
+    com base no uso de S3 ou armazenamento local.
+
+    :param has_s3_bucket: Booleano indicando se um bucket S3 está configurado.
+    :return: Um dicionário contendo as configurações.
+    """
+    if not has_s3_bucket:
+        # Configuração para armazenamento local
+        return {
+            'STATIC_URL': '/static/',
+            'STATIC_ROOT': BASE_DIR / 'docker_portal/staticfiles/static',
+            'MEDIA_URL': '/media/',
+            'MEDIA_ROOT': BASE_DIR / 'docker_portal/mediafiles',
+            'STORAGES': {
+                'default': {
+                    'BACKEND': 'devpro_s3_storages.handlers.FileSystemWithValidationStorage',
+                },
+                'staticfiles': {
+                    'BACKEND': 'django.contrib.staticfiles.storage.StaticFilesStorage',
+                },
+            },
+        }
+    else:
+        # Configuração para armazenamento no S3
+        AWS_S3_ACCESS_KEY_ID = config('AWS_S3_ACCESS_KEY_ID', default=None)
+        AWS_S3_SECRET_ACCESS_KEY = config('AWS_S3_SECRET_ACCESS_KEY', default=None)
+
+        if not AWS_S3_ACCESS_KEY_ID or not AWS_S3_SECRET_ACCESS_KEY:
+            raise ValueError('As credenciais AWS_S3_ACCESS_KEY_ID e AWS_S3_SECRET_ACCESS_KEY não estão configuradas.')
+
+        return {
+            'STATIC_URL': f'//{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/static/',
+            'STORAGES': {
+                'default': {
+                    'BACKEND': 'devpro_s3_storages.handlers.S3FileStorage',
+                    'OPTIONS': {
+                        'default_acl': 'private',
+                        'location': 'media',
+                    },
+                },
+                'staticfiles': {
+                    'BACKEND': 'storages.backends.s3.S3Storage',
+                    'OPTIONS': {
+                        'default_acl': 'public-read',
+                        'location': 'static',
+                        'querystring_auth': False,
+                    },
+                },
+            },
+        }
+
+
+# Determinar se o bucket S3 está configurado
+has_s3_bucket = bool(AWS_STORAGE_BUCKET_NAME)
+
+# Aplicar as configurações
+storage_config = configure_storage(has_s3_bucket)
+
+# Atribuir as configurações ao ambiente do Django
+STATIC_URL = storage_config['STATIC_URL']
+STATIC_ROOT = storage_config.get('STATIC_ROOT', None)
+MEDIA_URL = storage_config.get('MEDIA_URL', None)
+MEDIA_ROOT = storage_config.get('MEDIA_ROOT', None)
+STORAGES = storage_config['STORAGES']
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
