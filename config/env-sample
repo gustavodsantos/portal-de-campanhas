@@ -1,6 +1,8 @@
 # AVISO DE SEGURANÇA: não execute modo Debug=True em produção!
 DEBUG=False
 SECRET_KEY=escolha-um-segredo-como-valor-para-o-django
+LANGUAGE_CODE=pt-br
+TIME_ZONE=America/Sao_Paulo
 
 # Configure os dominios ou ips que sua aplicação vai rodar, separadas por vírgula
 ALLOWED_HOSTS=localhost,127.0.0.1
