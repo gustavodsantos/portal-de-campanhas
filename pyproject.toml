@@ -19,9 +19,7 @@ pillow = "^11.0.0"
 devpro-s3-storages = "^0.2.0"
 django-extensions = "^3.2.3"
 ipython = "^8.29.0"
-
-[tool.poetry.group.dev]
-optional = true
+gunicorn = "^23.0.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.3"
