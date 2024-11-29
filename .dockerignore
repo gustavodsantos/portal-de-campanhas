@@ -23,7 +23,7 @@ __pycache__/
 .gitignore
 .idea/
 .vscode/
-.venv
+.venv/
 
 # Ignorar arquivos de compilação ou de cache
 *.egg-info
