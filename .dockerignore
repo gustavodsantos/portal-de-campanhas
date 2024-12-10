@@ -9,7 +9,7 @@ logs
 *.log
 
 # Ignorar diretórios de dados do banco de dados
-.pgdata
+docker_portal/.pgdata
 dbdata
 
 # Ignorar dependências e ambientes virtuais
