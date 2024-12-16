@@ -3,7 +3,7 @@
 {% block title %}Desafios Atribuídos{% endblock %}
 
 {% block body %}
-    <h2>Desafios Atribuídos</h2>
+    <h1>Desafios Atribuídos</h1>
     <ul>
         {% for participacao in participacoes %}
             <li>{{ participacao.desafio.nome }} - Pontuação: {{ participacao.pontuacao }}</li>

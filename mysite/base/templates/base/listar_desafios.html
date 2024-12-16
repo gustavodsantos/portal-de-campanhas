@@ -8,7 +8,7 @@
 
         <ul>
             {% for desafio in desafios %}
-                <li><a class="link" href="{% url 'base:detalhes_desafio' desafio.id %}">{{ desafio.nome }}</a></li>
+                <li><a class="list" href="{% url 'base:detalhes_desafio' desafio.id %}">{{ desafio.nome }}</a></li>
             {% endfor %}
         </ul>
     

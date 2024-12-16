@@ -33,9 +33,10 @@
 
                         {% if user.is_authenticated %}
 
-                        <li class="nav-item">
-                            <a class="nav-link link" href="{% url 'base:visualizar_desafios_atribuidos' %}">Desafios atribuidos</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link link" href="{% url 'base:visualizar_desafios_atribuidos' %}">Desafios
+                                    atribuidos</a>
+                            </li>
 
                         {% endif %}
 
@@ -58,12 +59,12 @@
                                     <li class="nav-item">
                                         <a class="navbar-brand" href="{% url 'login' %}">Login</a>
                                     </li>
-                                    
+
                                     <li class="nav-item">
                                         <a class="nav-link link"
                                            href="{% url 'base:registrar_usuario' %}">Cadastre-se</a>
                                     </li>
-                                    
+
                                 </ul>
                             </div>
                         {% endif %}
@@ -83,6 +84,12 @@
     {% include 'base/footer.html' with contato_email='gustavojuniordos@hotmail.com' only %}
 
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous">
+
+</script>
 
 </body>
 </html>

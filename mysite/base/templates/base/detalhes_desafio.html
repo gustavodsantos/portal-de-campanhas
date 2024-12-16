@@ -21,13 +21,13 @@
             {% else %}
                 <form method="post" action="{% url 'base:aceitar_desafio' desafio.id %}">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-primary">Aceitar Desafio</button>
+                    <button type="submit" class="boton">Aceitar Desafio</button>
                 </form>
             {% endif %}
         {% else %}
             <form method="post" action="{% url 'base:aceitar_desafio' desafio.id %}">
                 {% csrf_token %}
-                <button type="submit" class="btn btn-primary">Aceitar Desafio</button>
+                <button type="submit" class="boton">Aceitar Desafio</button>
             </form>
         {% endif %}
     </div>

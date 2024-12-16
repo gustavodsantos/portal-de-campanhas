@@ -22,6 +22,7 @@ html, body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    text-align: center;
 }
 
 .wrapper {
@@ -34,7 +35,8 @@ html, body {
 .content {
     flex: 1;
     padding: 20px;
-    color: #1b1b1b;
+    background-color: #333;
+    color: #ffffff;
 }
 
 /* Footer fixo na parte inferior */
@@ -50,5 +52,47 @@ html, body {
 }
 
 .footer a:hover {
+    color: #828a9c;
+}
+
+li {
+    list-style: none;
+}
+
+.list {
+    list-style: none;
+    padding: 10px;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    text-decoration: none;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    font-size: 1.1rem;
+    color: #ffffff;
+}
+
+.list:hover {
+    background-color: #333;
+    color: #828a9c;
+}
+
+.boton {
+    background-color: #111111;
+    color: #ffffff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1.1rem;
+}
+
+.boton:hover {
+    background-color: #222222;
     color: #828a9c;
 }
