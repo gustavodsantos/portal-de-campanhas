@@ -6,7 +6,8 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ../:/app:z
-      - ./staticfiles/static:/portifolio_docker/staticfiles/static
+      - ./staticfiles/static:/docker_portal/staticfiles/static
+      - ./mediafiles:/docker_portal/mediafiles
     env_file:
       - ../.env
     command: bash -c "python manage.py migrate --noinput && python manage.py collectstatic --noinput && gunicorn mysite.wsgi:application --bind 0.0.0.0:8000"
