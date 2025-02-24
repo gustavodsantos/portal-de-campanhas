@@ -1,8 +1,6 @@
 # portal-de-campanhas
 portal de campanhas de gamificação onde administradores podem gerenciar campanhas e corretores podem participar dos desafios.
 
-Link do Deploy na AWS: http://ec2-54-175-244-167.compute-1.amazonaws.com/
-
 Nessa pasta se encontram os arquivos de backend do projeto Django.
 
 Será usado o Poetry como gestor de pacotes.

@@ -1,4 +1,4 @@
-# Usar a imagem base do Python
+#Usar a imagem base do Python
 FROM python:3.12
 
 # Instalar dependências de sistema necessárias
@@ -14,15 +14,9 @@ ENV POETRY_VIRTUALENVS_CREATE=false \
     POETRY_CACHE_DIR='/var/cache/pypoetry'
 
 # Instalar o Poetry
-#RUN curl -sSL https://install.python-poetry.org | python3 -
 RUN pip install poetry
 
-# Adicionar o Poetry ao PATH
-#ENV PATH="/root/.local/bin:$PATH"
-
-# Definir o diretório de trabalho dentro do contêiner
-
-# Copiar os arquivos pyproject.toml e poetry.lock da raiz do projeto para o contêiner
+#Copiar os arquivos pyproject.toml e poetry.lock da raiz do projeto para o contêiner
 COPY pyproject.toml ./
 COPY poetry.lock ./
 
@@ -36,4 +30,4 @@ COPY . ./
 EXPOSE 8000
 
 # Comando para rodar o Django
-CMD ["gunicorn", "--bind", ":8000", "--workers", "1", "mysite.wsgi"]
+CMD ["gunicorn", "--bind", ":8000", "--workers", "1", "--reload", "mysite.wsgi"]

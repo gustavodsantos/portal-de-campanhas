@@ -27,12 +27,12 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 1
 
       - name: Setup Python
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v4
         with:
           python-version: "3.12"
 
@@ -48,12 +48,7 @@ jobs:
 
       - name: Run tests with coverage
         env:
+          DOMAIN_NAME: localhost
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
         run: |
           poetry run pytest mysite --cov=mysite --cov-fail-under=40
-
-      - name: Upload coverage report
-        uses: actions/upload-artifact@v3
-        with:
-          name: coverage-report
-          path: htmlcov/
