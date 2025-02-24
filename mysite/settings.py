@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -143,9 +144,9 @@ def configure_storage(has_s3_bucket: bool):
         # Configuração para armazenamento local
         return {
             'STATIC_URL': '/static/',
-            'STATIC_ROOT': BASE_DIR / 'docker_portal/staticfiles/static',
+            'STATIC_ROOT': BASE_DIR / 'docker/staticfiles/static',
             'MEDIA_URL': '/media/',
-            'MEDIA_ROOT': BASE_DIR / 'docker_portal/mediafiles',
+            'MEDIA_ROOT': BASE_DIR / 'docker/mediafiles',
             'STORAGES': {
                 'default': {
                     'BACKEND': 'devpro_s3_storages.handlers.FileSystemWithValidationStorage',

@@ -9,7 +9,7 @@ logs
 *.log
 
 # Ignorar diretórios de dados do banco de dados
-docker_portal/.pgdata
+docker/.pgdata
 dbdata
 
 # Ignorar dependências e ambientes virtuais
@@ -31,7 +31,3 @@ __pycache__/
 *.coverage
 *.env
 *.bak
-
-# Ignorar arquivos e pastas específicas do projeto
-mediafiles/
-staticfiles/
